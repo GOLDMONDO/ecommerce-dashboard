@@ -25,9 +25,9 @@ Make sure your ecommerce-dashboard folder contains the following files:
    *   Open PyCharm's integrated Terminal (View -> Tool Windows -> Terminal).
    *   Ensure the working directory is your project folder `ecommerce-dashboard`. The command line should end with `ecommerce-dashboard>`.
    *   Run the data generation script:
-    ```bash
-    python generate_data.py
-    ```
+  ```bash
+   python generate_data.py
+   ```
    *   This process will create (or overwrite) the `sales_data.csv` file in the same folder.
    *   Verify that the `sales_data.csv` file was generated correctly and contains data.
 
@@ -36,9 +36,9 @@ Make sure your ecommerce-dashboard folder contains the following files:
 
    *   Stay in the same terminal from the previous step (ensuring you are in the `ecommerce-dashboard` folder).
    *   Run the dashboard script:
-    ```bash
+   ```bash
     python dashboard.py
-    ```
+   ```
    *   This script will read sales_data.csv and generate three PNG files:
        *   total_sales_by_day.png
        *   monthly_sales.png
