@@ -83,8 +83,12 @@ df = pd.DataFrame(data)
 df = df.sort_values("Date").reset_index(drop=True)
 
 # Guardar
-df.to_csv("sales_data_800.csv", index=False)
-print("✅ Archivo 'sales_data_800.csv' generado con datos realistas.")
+
+df.to_csv("sales_data.csv", index=False)
+print("✅ Archivo 'sales_data.csv' generado con datos realistas.")
 print(f"   Total de registros: {len(df)}")
 print(f"   Fechas: {df['Date'].min()} a {df['Date'].max()}")
 print(f"   Productos únicos: {df['Product'].nunique()}")
+
+import os
+print(f"   Ruta de guardado: {os.getcwd()}")
