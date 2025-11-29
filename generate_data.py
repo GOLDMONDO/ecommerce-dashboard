@@ -3,11 +3,11 @@ import random
 from datetime import datetime, timedelta
 import numpy as np
 
-# Semilla para reproducibilidad
+# Seed for reproducibility
 random.seed(42)
 np.random.seed(42)
 
-# Definir catálogo de productos con pesos (popularidad) y rangos de precio
+# Define product catalog with weights (popularity) and price ranges
 products = {
     "Laptop": {"weight": 1, "price_range": (800, 1500)},
     "Monitor": {"weight": 2, "price_range": (150, 400)},
@@ -22,35 +22,34 @@ products = {
 product_names = list(products.keys())
 weights = [products[p]["weight"] for p in product_names]
 
-# Ciudades con volumen ponderado
+# Cities with weighted volume
 cities = ["CDMX", "Guadalajara", "Monterrey", "Puebla", "Tijuana"]
 city_weights = [5, 3, 4, 2, 2]  # CDMX tiene más pedidos
 
-# Generar fechas desde enero a octubre 2024 (puedes extender a nov-dic si quieres)
+# Generate dates from January to December 2024 (you can extend more if you want)
 start_date = datetime(2024, 1, 1)
 end_date = datetime(2024, 12, 31)
 date_range = pd.date_range(start_date, end_date, freq='D')
 
-# Lista para acumular datos
+# Ready to collect data
 data = []
 
-# Generar ~800 órdenes (más realista que 500 filas sin contexto)
+# Generate ~800 orders (more realistic than 500 rows without context)
 for _ in range(800):
-    # Elegir fecha
+    # Choose a date
     date = random.choice(date_range)
 
-    # Temporada alta: incrementar probabilidad de pedidos en nov-dic (opcional)
-    # En este caso solo hasta octubre, pero si quieres extender, avísame.
+    # Peak season: increase probability of orders in Nov-Dec (optional)
 
-    # Elegir ciudad y producto con pesos
+    # Choose city and product with weights
     city = random.choices(cities, weights=city_weights)[0]
     product = random.choices(product_names, weights=weights)[0]
 
-    # Precio base
+    # Base price
     min_p, max_p = products[product]["price_range"]
     base_price = round(random.uniform(min_p, max_p), 2)
 
-    # Ajuste: productos caros suelen venderse en menor cantidad
+    # Adjustment: expensive products tend to be sold in smaller quantities
     if base_price > 500:
         quantity = random.randint(1, 2)
     elif base_price > 100:
@@ -60,7 +59,7 @@ for _ in range(800):
 
     total = round(base_price * quantity, 2)
 
-    # Estado del pedido (más 'Delivered' que otros)
+    # Order status (more 'Delivered' than others)
     status = random.choices(
         ["Delivered", "Shipped", "Processing"],
         weights=[70, 20, 10]
@@ -76,19 +75,19 @@ for _ in range(800):
         "Status": status
     })
 
-# Crear DataFrame
+# Create DataFrame
 df = pd.DataFrame(data)
 
-# Ordenar por fecha
+# Sort by date
 df = df.sort_values("Date").reset_index(drop=True)
 
-# Guardar
+# Save
 
 df.to_csv("sales_data.csv", index=False)
-print("✅ Archivo 'sales_data.csv' generado con datos realistas.")
-print(f"   Total de registros: {len(df)}")
-print(f"   Fechas: {df['Date'].min()} a {df['Date'].max()}")
-print(f"   Productos únicos: {df['Product'].nunique()}")
+print("✅ File 'sales_data.csv' generated with realistic data.")
+print(f"   Total number of records: {len(df)}")
+print(f"   Dates: {df['Date'].min()} a {df['Date'].max()}")
+print(f"   Unique products: {df['Product'].nunique()}")
 
 import os
-print(f"   Ruta de guardado: {os.getcwd()}")
+print(f"   Save path: {os.getcwd()}")

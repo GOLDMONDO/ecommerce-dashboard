@@ -27,7 +27,7 @@ Make sure your ecommerce-dashboard folder contains the following files:
    *   Run the data generation script:
   ```bash
    python generate_data.py
-   ```
+  ```
    *   This process will create (or overwrite) the `sales_data.csv` file in the same folder.
    *   Verify that the `sales_data.csv` file was generated correctly and contains data.
 
